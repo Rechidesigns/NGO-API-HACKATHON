@@ -86,25 +86,25 @@ WSGI_APPLICATION = 'ngo_project_folder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'deund6bia1qteh',
-#         'USER': 'xzegiqpxmgkfax',
-#         'PORT': '5432',
-#         'PASSWORD': 'f93076119ab3f70a06c946ce50f51e3ab80aa15bf2fed3cb3cc90b4ef2a3757f',
-#         'HOST': 'ec2-54-160-200-167.compute-1.amazonaws.com',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'deund6bia1qteh',
+        'USER': 'xzegiqpxmgkfax',
+        'PORT': '5432',
+        'PASSWORD': 'f93076119ab3f70a06c946ce50f51e3ab80aa15bf2fed3cb3cc90b4ef2a3757f',
+        'HOST': 'ec2-54-160-200-167.compute-1.amazonaws.com',
+    }
+}
 
 
 
