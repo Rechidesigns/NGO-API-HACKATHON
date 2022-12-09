@@ -14,8 +14,9 @@ from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 from django.utils.timezone import timedelta
- 
 
+
+load_dotenv(os.path.join(".env"))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -86,29 +87,24 @@ WSGI_APPLICATION = 'ngo_project_folder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'spfodtfl',
-        'USER': 'spfodtfl',
-        'PORT': '5432', 
-        'PASSWORD': 'LtAQYQRwhf9fyhXhPthxjhT9HgCj15rK',
-        'HOST': 'arjuna.db.elephantsql.com',
-    }
-}
-
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'deund6bia1qteh',
-#         'USER': 'xzegiqpxmgkfax',
-#         'PORT': '5432',
-#         'PASSWORD': 'f93076119ab3f70a06c946ce50f51e3ab80aa15bf2fed3cb3cc90b4ef2a3757f',
-#         'HOST': 'ec2-54-160-200-167.compute-1.amazonaws.com',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'spfodtfl',
+#         'USER': 'spfodtfl',
+#         'PORT': '5432', 
+#         'PASSWORD': 'LtAQYQRwhf9fyhXhPthxjhT9HgCj15rK',
+#         'HOST': 'arjuna.db.elephantsql.com',
 #     }
 # }
+
+import dj_database_url
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+}
 
 
 
@@ -149,11 +145,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_URL = "static/"
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATIC_FILE_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

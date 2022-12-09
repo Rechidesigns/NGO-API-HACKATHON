@@ -1,5 +1,12 @@
-.env
 db.sqlite3
 __init__.py
 __pycache__
-1
+.env/
+.venv/
+env/
+venv/
+*.env
+
+*.pyc
+db.sqlite3
+staticfiles/
