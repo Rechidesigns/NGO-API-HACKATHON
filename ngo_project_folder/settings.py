@@ -120,12 +120,20 @@ WSGI_APPLICATION = 'ngo_project_folder.wsgi.application'
 #     }
 # }
 
-import dj_database_url
+# import dj_database_url
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# DATABASE_URL = os.getenv("DATABASE_URL")
+
+# DATABASES = {
+#     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+# }
+
 
 DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -179,7 +187,7 @@ STATIC_FILE_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "account.CustomUser"
+AUTH_USER_MODEL = "account.User"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #'django.core.mail.backends.smtp.EmailBackend'
@@ -193,16 +201,19 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
-DEFAULT_FROM_EMAIL = 'Clara from Rechie <noreply@rechie.com>'
+DEFAULT_FROM_EMAIL = 'Admin from NGO <noreply@ngo.com>'
 
-SITE_NAME = 'Rechie'
+SITE_NAME = 'ngosite'
 
-DOMAIN = 'Rechie.com'
+DOMAIN = 'ngo.com'
 
 DJOSER = {
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
+'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+'ACTIVATION_URL': '#/activate/{uid}/{token}',
+'SEND_ACTIVATION_EMAIL': True,
 }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
@@ -218,19 +229,21 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-#swagger documentation
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'Bearer': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header'
-        }
-    }
-}
+# #swagger documentation
+# SWAGGER_SETTINGS = {
+#     'SECURITY_DEFINITIONS': {
+#         'Bearer': {
+#             'type': 'apiKey',
+#             'name': 'Authorization',
+#             'in': 'header'
+#         }
+#     }
+# }
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUD_API'),
     'API_SECRET': os.getenv('CLOUD_SECRET_KEY'),
 }
+
+AUTHENTICATION_BACKEND = ['django.contrib.auth.backends.ModelBackend']

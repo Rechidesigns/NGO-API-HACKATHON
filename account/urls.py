@@ -1,14 +1,13 @@
 from django.urls import path, include
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import User
-from . import views
+from .views import LogoutView, LoginView
+from rest_framework_simplejwt.views import TokenRefreshView
 
-admin.site.register(User, UserAdmin)
+
+
 
 urlpatterns = [
+    path('admin/login', LoginView.as_view()),
+    path('logout', LogoutView.as_view()),
+    path('refresh', TokenRefreshView().as_view(), name="refresh_token"),
     path('auth/', include('djoser.urls')),
-    path('access_token/', include('djoser.urls.jwt')),
-    path("login", views.login_view), 
-    path("logout", views.logout_view)
 ]

@@ -12,7 +12,7 @@ class Ngo(models.Model):
     description = models.TextField(blank=True, null=True)
     reg_num = models.TextField(max_length=200, blank=True, null=True)
     address = models.TextField(max_length=200)
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(blank=True)
     email = models.EmailField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -20,9 +20,6 @@ class Ngo(models.Model):
     def _str_(self):
         return self.name
 
-    @property
-    def ngo_list(self):
-        return self.Ngo.all().values()
 
 
 
@@ -40,9 +37,6 @@ class Blog(models.Model):
     def _str_(self):
         return self.tittle
 
-    @property
-    def blog_list(self):
-        return self.Blog.all().values()
 
 
 
