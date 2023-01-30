@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*", "localhost:3000", "web-production-1386.up.railway.app"]
+ALLOWED_HOSTS = ["*", "localhost:3000", '127.0.0.1', "web-production-1386.up.railway.app"]
 
 # ALLOWED_HOSTS = ["*", "http://localhost:8080", "http://127.0.0.1:9000", "http://localhost:3000"]
 
