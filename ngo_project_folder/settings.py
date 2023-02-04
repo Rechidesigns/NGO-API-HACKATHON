@@ -27,31 +27,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUD_API'),
+    'API_SECRET': os.getenv('CLOUD_SECRET_KEY'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*", "localhost:3000", "web-production-1386.up.railway.app"]
+ALLOWED_HOSTS = ["*"]
 
-# ALLOWED_HOSTS = ["*", "http://localhost:8080", "http://127.0.0.1:9000", "http://localhost:3000"]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
-    "https://sub.example.com",
-    "http://localhost:8080",
-    "http://127.0.0.1:9000",
-    "http://localhost:3000",
-]
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -68,6 +58,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'account',
     "corsheaders",
+    'cloudinary',
+    'cloudinary_storage',
     
 ]
 
@@ -189,8 +181,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "account.User"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# 'django.core.mail.backends.smtp.EmailBackend'
 # use smtp wen finishing the job. meanwhile, wen testing use console.
 
 EMAIL_HOST = 'smtp.gmass.co'
@@ -240,10 +232,11 @@ SIMPLE_JWT = {
 #     }
 # }
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUD_API'),
-    'API_SECRET': os.getenv('CLOUD_SECRET_KEY'),
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+#     'API_KEY': os.getenv('CLOUD_API'),
+#     'API_SECRET': os.getenv('CLOUD_SECRET_KEY'),
+# }
+
 
 AUTHENTICATION_BACKEND = ['django.contrib.auth.backends.ModelBackend']

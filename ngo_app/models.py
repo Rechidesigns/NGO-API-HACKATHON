@@ -1,11 +1,6 @@
 from django.db import models
-from django.utils import timezone
-from django.forms import model_to_dict
 from phonenumber_field.modelfields import PhoneNumberField
 
-STATUS = (("unpublished","Unpublished"), 
-              ("published","Published"))
-    
 
 class Ngo(models.Model):
     name = models.CharField(max_length=100)
@@ -22,20 +17,25 @@ class Ngo(models.Model):
 
 
 
+STATUS = (("draft","Draft"), 
+              ("published","Published"))
+
 
 class Blog(models.Model):
     tittle = models.CharField(max_length=250)
     details = models.TextField()
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(upload_to='NGOblogpic', null=True, blank=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=250, blank=True, null=True)
-    status = models.CharField(max_length=50, choices=STATUS, default="published")
+    published = models.CharField(max_length=50, choices=STATUS, default="published")
 
-    STATUS = (("unpublished","Unpublished"), 
-              ("published","Published"))
+    class Meta:
+        ordering = ('-published',)
 
     def _str_(self):
         return self.tittle
+
+
 
 
 
